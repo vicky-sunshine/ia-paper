@@ -1,0 +1,61 @@
+\section{Introduction}
+In these days, the network functions have took its place in modern life, play an important role in providing critical performance, security and policy compliance capabilities. However, network service is usually achieved by the hardware and using a dedicated device to deploy and integrate a variety of network functions, which causes the lack of flexibility in service delivery. When the network service provider wants to introduce the new service, customers will tend not to replace with new equipment and the service provider must also cost high capital expenses (CapEx) and operation expenses (OpEx) to replace the physical equipment. As a result, the network service is difficult to promote and update.
+
+It was against this background, the concept of network function virtualization (NFV) was put forward, expecting to solve these problem. NFV transforms how network operators
+architect their infrastructures with the virtualization technology to separate software instance from hardware platform, and implements virtualized network functions (VNFs) through software  techniques and run VNFs on compute infrastructures. NFV also innovates in the service delivery, by deploying these functions over general virtualized compute infrastructures, which are used to replace the traditional network appliances. When these functions are no longer a large degree depent on specific physical devices, the management of VNFs can be easier and the deployment will achieve flexibility and scalability.
+
+With the trend of Software Defined Network, virtualization of the network functions is a big step forward. SDN works perfectly with virtual network functions. From the very beginning SDN simply provides dynamic links between network functions. Which represents the service provider or cloud center managers can dynamically set the target traffic need to go through what kind of processing and processing order. So that traffic can be separated through data plane and control plane by SDN technology and resiliently steer between services. And to the recent SDN technology can not only provide connectivity, but also can become an important part of the realization of virtual network functions. In this paper, these network functions is called SDN-enabled VNF.
+
+
+The SDN-enabled VNF
+
+
+
+This paper proposed a number of implementation of the SDN-enabled network functions and build up a NFV with the management system. To explore the feasibility of this SDN to participate in the network functions, also to provide network service providers a complete solution concept.
+
+% lack of section introduce
+
+\section{System Design and Implementation}
+
+\subsection{NFV Design Overview}
+With the concept of SDN-enabled VNFs, the network functions have been achived by the synergies between compute and network infrastructures. The former is mainly responsible for dealing with stateful processing, and the latter is used for stateless processing component.
+  \subsubsection{Stateful Processing Componemt}
+    This component have to perform more complex algorithm, keep the state associated with the VNF and provide interface for service providers or customers to configure and update the behavior of the stateless datapath processing component, since software is good at these tasks. It's worth noting that we use southbound of SDN controller to handle the interface between the stateful and stateless component with OpenFlow protocol, which was originally designed for this.
+  \subsubsection{Stateless Processing Componemt}
+    Stateless processing component, are implemented by SDN datapath resources, which is optimized for data plane traffic processing. Since SDN datapath have decoupled the control plane and data plane, so it can accept the control message from the stateful processing component.
+
+
+\section{Virtualized Network Functions and Use Cases}
+
+
+\subsection{Firewall}
+\subsection{Network Tap}
+\subsection{NAT}
+\subsection{QoS}
+
+
+
+\section{Evaluation}
+
+
+
+
+\section{Conclusion}
+
+
+
+\section{Copyright}
+
+It is the policy of IEICE to own the copyright to the
+full paper manuscript published in Technical Report of
+IEICE.
+
+
+\begin{center}
+\begin{tabular}{l}
+ \bf December 10, 2009 13:59 HAST (UTC -10hr) \\
+ \bf December 11, 2009 8:59 JST (UTC +9hr)
+\end{tabular}
+\end{center}
+
+No manuscript is accepted after the deadline.
