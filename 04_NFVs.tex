@@ -1,0 +1,78 @@
+\section{Virtualized Network Functions and Use Cases}
+Considering SDN-enabled architecuture approach, the NFVs can be furthur classified into three categories with different state complexity when processing incomming traffic:
+
+\begin{enumerate}[1)]
+  \item{\bf{Policy-based service:}}
+  In this category, the network infrastructure takes the primary responsibility of handling incoming traffic and the traffic need only stateless processing which is following certain policy given by the service management. Firewall, network mirror tap and load balancing are belongs to this type.
+
+  \item{\bf{Dynamic-configured service:}}
+  The first a few packets are needed to send to stateful processing component for initializing configuration, and the rest packets can be handled by SDN datapath with the previous configured setting. For example, NAT and DHCP services are belongs to this category.
+
+  \item{\bf{QoS service:}}
+  In this approach, our NFV is collaborate with a traffic classification system. The whole incoming traffic will be redirect to the compute infrastructure, where the classifiers run on. When we get the information abount current connection and traffic, we can take responding action, like dropping the connection of malware or limited the throuput of certain streaming application.
+\end{enumerate}
+
+Following we would introduce the SDN-enabled VNFs we have implemented based on these three categories.
+\subsection{Policy-based service}
+
+We take firewall as an example to illustrate policy-based service. Our virtual firewall service provides the usual packet filtering. It filters each packet based on information contained in the packet itself, using a combination of the packet's source address, destination address and its protocol, which can be transformed into a list of OpenFlow rules.
+
+In this case, the target traffic need only stateless processing which can be  done solely by the SDN datapath resource. Therefore, we just provide policy management interface to handle the request from service manager in the software controller component. When the firewall network service was requested to update firewall policy, the controller will map the request to OpenFlow protocol messages and send to the SDN switch, which will follow the policy to process the incoming traffic.
+
+\begin{figure}[!t]
+  \centering
+  \def\svgwidth{\linewidth}
+  \input{figures/fw_usecase.pdf_tex}
+  \caption{Firewall}
+  \label{fig:fw_use}
+\end{figure}
+
+For example, if the service manager choose to block certain protocol for source IP address 192.168.0.100, he can send the request to controller via management API. The request will be mapped to the form of OpenFlow protocol, Match-Fields with the drop action, and then send to the datapath resource. As a result, when the host 192.168.0.100 want to send SSH request, it will be blocked by the SDN switch.
+
+\subsection{Dynamic-configured service}
+
+Our virtualized NAT is a typical examples of this kind of service. The NAT (Network Address Translation) service is a network function which remapping one IP address space into another by modifying network address.
+The
+The remapping process is  with Ryu SDN controller. The OpenFlow protocol
+optional action “Set-Field” is employed to rewrite packet header fields to
+easily convert the forwarding policy into OpenFlow entries. Currently, the
+Source NAT (SNAT) is implemented which allows multiple hosts on the private
+network (inside) to connect to the Internet (outside).
+
+When a packet from private network host arrives at the SDN switch, the packet
+header fields are modified  by Set-Field action. For outgoing packet, the
+source IP address and source port number are modified to fit the public IP
+of NAT and remap a port number of NAT. For ingoing packet, the destination
+IP and destination port number are modified accordingly. Below are some
+examples to present the flow tables for NAT service with ingoing packets
+and outgoing packets.
+
+As demonstrated in Table \ref{table1}, the public IP address of NAT is
+10.10.10.1 and a host (client) with IP address 192.168.8.40 and port number
+5566 sent a packet to a server with IP address 8.8.8.8 and port number 7788.
+The action modifies the source port to 2000 which means the NAT is enabled by
+the SDN controller. As shown in Table \ref{table2}, when the server sends back several
+packets to the client, the destination IP and destination port number
+are modified by the SDN switch accordingly.
+
+\begin{figure}[!t]
+  \centering
+  \def\svgwidth{\linewidth}
+  \input{figures/nat_usecase.pdf_tex}
+  \caption{NAT VNF}
+  \label{fig:nat_use}
+\end{figure}
+
+
+
+
+\subsection{QoS service}
+\begin{figure}[!t]
+  \centering
+  \def\svgwidth{\linewidth}
+  \input{figures/qos_usecase.pdf_tex}
+  \caption{QoS VNF}
+  \label{fig:qos_use}
+\end{figure}
+\subsubsection{IDS Integration}
+z

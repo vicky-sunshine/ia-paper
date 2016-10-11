@@ -1,47 +1,51 @@
 % IEICE Infromation Theory Conference (Technical Meeting)
 % Template for the IEICE technical report
 % Size: A4 (not US Letter)
-% Page: at most 6
+% Page: at most
 
-\documentclass[twocolumn]{article}
+\documentclass[a4paper, twocolumn, 10pt]{article}
 
 %%% Do not change page parameters
 \usepackage{techrep}
 \usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{enumerate}
+
 \setlength{\columnsep}{10mm}
 \setlength{\textwidth}{180mm}
 \setlength{\textheight}{250mm}
 \addtolength{\oddsidemargin}{-9mm}
 \addtolength{\topmargin}{-25mm}
 
-%%%
+\graphicspath{{figures/}}
 
-\title{How to Prepare and Submit Papers}
+\title{NFV blah}
 \author{
-Chi-Hsuan Li${}^{\dagger}$
+Chi-Hsuan Li${}^{\dagger}$,
+Che-Wei Lin${}^{\ddagger}$,
+Sheng-Jung Wu${}^{\dagger}$
 }
+
 \date{
 \begin{tabular}{c}
- ${}^{\dagger}$
- Computer Science, National Tsing Hua University \\
- No.101, Sec. 2, Guangfu Rd., East Dist., Hsinchu City 300, Taiwan \\
+  ${}^{\dagger}$
+  Department of Computer Science, National Tsing Hua University \\
+  No.101, Sec. 2, Guangfu Rd., East Dist., Hsinchu City 300, Taiwan \\
+  ${}^{\ddagger}$
+  Institute of Communication Engineering, National Tsing Hua University \\
+  No.101, Sec. 2, Guangfu Rd., East Dist., Hsinchu City 300, Taiwan \\
 \end{tabular}
 }
 
 \begin{document}
 
-\begin{abstract}
- IEICE (The Institute of Electronics, Information and Communication Engineers)
- provides a template file for the IEICE Technical Report.
-\end{abstract}
+\include{00_abstraction}
+\input{01_introduction}
+\input{02_related_work}
+\input{03_design_implementaion}
+\input{04_NFVs}
 
-\begin{keyword}
- IEICE, IEICE technical report, \LaTeX, template
-\end{keyword}
-
-\maketitle
-
-\include{main}
 
 \end{document}
 
