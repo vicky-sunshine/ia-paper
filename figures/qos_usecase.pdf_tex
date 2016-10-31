@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{609.88bp}%
+    \setlength{\unitlength}{605.88bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,7 +48,7 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.70046567)%
+  \begin{picture}(1,0.70509012)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{qos_usecase.pdf}}%
   \end{picture}%
 \endgroup%
